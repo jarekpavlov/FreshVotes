@@ -1,0 +1,8 @@
+.classpath
+.project
+/FreshVotes/.settings
+/FreshVotes/target
+/FreshVotes/.mvn
+/FreshVotes/.project
+mvnw.cmd
+mvnw
