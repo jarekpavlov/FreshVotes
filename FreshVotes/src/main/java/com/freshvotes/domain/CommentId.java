@@ -1,4 +1,4 @@
-package com.freshvote.domain;
+package com.freshvotes.domain;
 
 import java.io.Serializable;
 

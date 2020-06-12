@@ -1,4 +1,4 @@
-package com.freshvote.domain;
+package com.freshvotes.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

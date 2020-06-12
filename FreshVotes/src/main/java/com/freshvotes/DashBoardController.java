@@ -1,4 +1,4 @@
-package com.freshvote;
+package com.freshvotes;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
