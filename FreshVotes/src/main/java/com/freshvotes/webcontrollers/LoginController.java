@@ -13,5 +13,10 @@ public class LoginController {
 		
 		return "login";
 	}
+	@GetMapping(value = "/registration")
+	public String Registration() {
+		
+		return "registration";
+	}
 
 }

@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <title>FreshVotes login</title>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+  $(function () {
+	$("#register").click(function() {
+		window.location.href="/registration"
+	});
+});
+  
+  </script>
 </head>
 <body>
 	<form action="" method="post">
@@ -29,6 +41,7 @@
 			</p>
 			<div>
 				<button type="submit" class="btn">Log in</button>
+				<button type="button" class="btn" id="register">Registration</button>
 			</div>
 		</fieldset>
 	</form>
