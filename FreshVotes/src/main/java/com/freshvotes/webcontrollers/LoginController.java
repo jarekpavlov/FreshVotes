@@ -1,7 +1,11 @@
 package com.freshvotes.webcontrollers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.freshvotes.domain.User;
 
 
 @Controller
@@ -13,10 +17,19 @@ public class LoginController {
 		
 		return "login";
 	}
+	
 	@GetMapping(value = "/registration")
-	public String Registration() {
-		
+	public String Registration(ModelMap model) {
+		model.put("user", new User());
 		return "registration";
+	}
+	
+	@PostMapping(value = "/registration")
+	public String createAccount(User user) {
+		
+		System.out.println(user);
+		
+		return "redirect:/registration";
 	}
 
 }
