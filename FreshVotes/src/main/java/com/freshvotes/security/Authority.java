@@ -1,4 +1,4 @@
-package com.freshvotes.security;
+ package com.freshvotes.security;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
