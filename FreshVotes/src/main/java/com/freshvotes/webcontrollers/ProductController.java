@@ -25,11 +25,7 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepo;
 	
-	@GetMapping(value = "/product")
-	public String getProduct() {
-		return "product";
-		
-	}
+
 	@GetMapping(value = "/product/{productId}")
 	public String getProductId(@PathVariable Long productId, ModelMap model, HttpServletResponse response ) throws IOException {
 		
