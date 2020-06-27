@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -26,10 +25,11 @@ public class ProductController {
 	private ProductRepository productRepo;
 	
 
+	
 	@GetMapping(value = "/product/{productId}")
 	public String getProductId(@PathVariable Long productId, ModelMap model, HttpServletResponse response ) throws IOException {
 		
-		 Optional<Product> ProductOpt = productRepo.findById(productId);
+		 Optional<Product> ProductOpt = productRepo.findByIdWithUser(productId);
 		 
 		 if (ProductOpt.isPresent()) {
 			 Product product =ProductOpt.get();
