@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/registration").permitAll()
+		.antMatchers("/images/**").permitAll()
 		.anyRequest().hasRole("USER").and()
 		.formLogin().loginPage("/login").defaultSuccessUrl("/dashboard").permitAll()
 		.and().logout().logoutUrl("/logout").permitAll();

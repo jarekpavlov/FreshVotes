@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>FreshVotes login</title>
-  <script th:replace="fragments/header :: headerElement"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    <script th:replace="fragments/header :: headerElement"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -16,6 +16,7 @@
 </script>
 </head>
 <body>
+    <script th:replace="fragments/header :: header"></script>
 	<div class="container">
 		<div class="card" style="margin-top: 1.5em">
 			<div class="card-header"><h2>Please Login</h2></div>
@@ -33,7 +34,7 @@
 								Reason: <span
 									th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
 							</div>
-						</div>
+					    </div>
 						<!-- the configured LogoutConfigurer#logoutSuccessUrl is /login?logout and contains the query param logout -->
 						<div th:if="${param.logout != null}">You have been logged
 							out.</div>
