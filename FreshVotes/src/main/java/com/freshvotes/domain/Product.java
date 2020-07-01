@@ -18,7 +18,7 @@ public class Product {
 	
 	
 	private Long id;
-	String name;
+	private String name;
 	private Boolean published;
 	private User user;
 	private Set<Feature> features=new HashSet<>();
