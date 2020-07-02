@@ -1,5 +1,8 @@
 package com.freshvotes.webcontrollers;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -34,8 +37,16 @@ public class FeatureController {
 	@PostMapping("{featureId}")
 	public String saveFeature(Feature feature, @PathVariable Long featureId, @PathVariable Long productId) {
 		
+		String encodedProductName;
+		
+		try {
+			encodedProductName = URLEncoder.encode(feature.getProduct().getName(),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return "redirect:/dashboard";
+		}
 		featureService.save(feature);
-		return "redirect:/product/"+productId+"/features/"+featureId;
+		
+		return "redirect:/p/"+encodedProductName;
 	}
 	
 
