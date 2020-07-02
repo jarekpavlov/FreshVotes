@@ -35,4 +35,24 @@ public class FeatureService {
 		return feature;
 	}
 
+	public Feature findById(Long featureId) {
+		
+		Optional<Feature> featureOpt=featurRepo.findById(featureId);
+		Feature feature = new Feature();
+		if (featureOpt.isPresent()) {
+			 feature=featureOpt.get();
+		}
+		
+		return feature;
+	}
+
+	public Feature save(Feature feature) {
+		
+		
+		
+		return featurRepo.save(feature);
+		
+		
+	}
+
 }

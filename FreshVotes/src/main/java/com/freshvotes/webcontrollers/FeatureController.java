@@ -2,6 +2,8 @@ package com.freshvotes.webcontrollers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +20,23 @@ public class FeatureController {
 	
 	@PostMapping("")
 	public String createFeatur(@PathVariable Long productId) {
-		
-		featureService.createFeature(productId);		
+		Feature feature=featureService.createFeature(productId);		
+		return "redirect:/product/"+productId+"/features/"+feature.getId();
+	}
+	
+	@GetMapping("{featureId}")
+	public String mapFeatur(ModelMap model, @PathVariable Long featureId,@PathVariable Long productId) {
+		Feature feature = featureService.findById(featureId);
+		model.put("feature", feature);
 		return "features";
 	}
 	
+	@PostMapping("{featureId}")
+	public String saveFeature(Feature feature, @PathVariable Long featureId, @PathVariable Long productId) {
+		
+		featureService.save(feature);
+		return "redirect:/product/"+productId+"/features/"+featureId;
+	}
 	
 
 
