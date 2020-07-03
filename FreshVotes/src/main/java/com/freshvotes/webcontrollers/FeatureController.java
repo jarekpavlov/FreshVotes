@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.freshvotes.domain.Feature;
+import com.freshvotes.domain.User;
 import com.freshvotes.service.FeatureService;
 
 @Controller
@@ -22,8 +24,9 @@ public class FeatureController {
 	private FeatureService featureService;
 	
 	@PostMapping("")
-	public String createFeatur(@PathVariable Long productId) {
-		Feature feature=featureService.createFeature(productId);		
+	public String createFeatur(@AuthenticationPrincipal User user, @PathVariable Long productId) {
+		
+		Feature feature=featureService.createFeature(productId,user);		
 		return "redirect:/product/"+productId+"/features/"+feature.getId();
 	}
 	
@@ -35,8 +38,9 @@ public class FeatureController {
 	}
 	
 	@PostMapping("{featureId}")
-	public String saveFeature(Feature feature, @PathVariable Long featureId, @PathVariable Long productId) {
+	public String saveFeature(@AuthenticationPrincipal User user, Feature feature, @PathVariable Long featureId, @PathVariable Long productId) {
 		
+		feature.setUser(user);
 		String encodedProductName;
 		
 		try {
