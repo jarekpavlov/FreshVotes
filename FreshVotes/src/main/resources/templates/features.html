@@ -33,6 +33,10 @@
 	      	<div th:if="${user.id==feature.user.id}">
 		      	<button type="submit" class="btn btn-primary btn-lg"  >Save</button>
 	      	</div>
+	      		<h2>Comments</h2>
+	      			<div th:each="comment:${comments}">
+	      				<samp th:text="${comment.text}"></samp>
+	      			</div>
 	      </form>
       </div>
 </body>
