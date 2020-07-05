@@ -31,9 +31,10 @@ public class FeatureController {
 	}
 	
 	@GetMapping("{featureId}")
-	public String mapFeatur(ModelMap model, @PathVariable Long featureId,@PathVariable Long productId) {
+	public String mapFeatur(@AuthenticationPrincipal User user, ModelMap model, @PathVariable Long featureId,@PathVariable Long productId) {
 		Feature feature = featureService.findById(featureId);
 		model.put("feature", feature);
+		model.put("user",user);
 		return "features";
 	}
 	
