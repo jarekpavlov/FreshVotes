@@ -33,11 +33,20 @@
 	      	<div th:if="${user.id==feature.user.id}">
 		      	<button type="submit" class="btn btn-primary btn-lg"  >Save</button>
 	      	</div>
-	      		<h2>Comments</h2>
-	      			<div th:each="comment:${comments}">
-	      				<samp th:text="${comment.text}"></samp>
-	      			</div>
 	      </form>
+	      		<h2>Comments</h2>
+		      		<form action="">
+		      			<div class="form-group" style="margin-top: 1.5em">
+			      			<label for = exampleFormControlTextArea>Leave a comment below</label>
+			      			<textarea  id="exampleFormControlTextArea"  rows="3" class="form-control" ></textarea>
+		      			</div>
+		      		</form>
+	      			<div th:each="comment:${comments}">
+	      				<span th:if="${comment.comment==null}" th:text="${comment.text}"></span>
+	      				<div th:each=commentLevel1:${comment.comments} style="margin-left: 1.5em " >
+	      					<span th:text="${commentLevel1.text}"></span>
+	      				</div>
+	      			</div>
       </div>
 </body>
 </html>
