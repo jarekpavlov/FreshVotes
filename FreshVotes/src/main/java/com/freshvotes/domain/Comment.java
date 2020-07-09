@@ -1,8 +1,8 @@
 package com.freshvotes.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-public class Comment {
+public class Comment implements Comparable<Comment> {
 	
 	
 	private Long id;
@@ -26,7 +26,7 @@ public class Comment {
 	private User user;
 	private Comment comment;
 	private Date createdDate;
-	private List<Comment> comments= new ArrayList<>();
+	private Set<Comment> comments= new TreeSet<>();
 	
 	@Column(length = 5000)
 	public String getText() {
@@ -74,11 +74,46 @@ public class Comment {
 		this.createdDate = createdDate;
 	}
 	@OneToMany(mappedBy = "comment")
-	public List<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
-	public void setComments(List<Comment> comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", text=" + text + "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comment other = (Comment) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	@Override
+	public int compareTo(Comment that) {
+		int comparedValue=this.createdDate.compareTo(that.createdDate);
+		if(comparedValue==0)
+			comparedValue=this.id.compareTo(that.id);
+		return comparedValue;
 	}
 	
 	

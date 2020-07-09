@@ -2,6 +2,7 @@ package com.freshvotes.webcontrollers;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.freshvotes.domain.Comment;
 import com.freshvotes.domain.Feature;
 import com.freshvotes.domain.User;
 import com.freshvotes.service.FeatureService;
@@ -33,10 +35,15 @@ public class FeatureController {
 	@GetMapping("{featureId}")
 	public String mapFeatur(@AuthenticationPrincipal User user, ModelMap model, @PathVariable Long featureId,@PathVariable Long productId) {
 		Feature feature = featureService.findById(featureId);
-		model.put("comments", feature.getComments());
+		model.put("comments", getCommentsWithotDuplicates(feature.getComments()));
 		model.put("feature", feature);
 		model.put("user",user);
 		return "features";
+	}
+	
+	public Set<Comment> getCommentsWithotDuplicates(Set<Comment> comments){
+		
+		return  comments;
 	}
 	
 	@PostMapping("{featureId}")
