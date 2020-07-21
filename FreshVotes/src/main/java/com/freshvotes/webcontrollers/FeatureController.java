@@ -2,6 +2,8 @@ package com.freshvotes.webcontrollers;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +37,26 @@ public class FeatureController {
 	@GetMapping("{featureId}")
 	public String mapFeatur(@AuthenticationPrincipal User user, ModelMap model, @PathVariable Long featureId,@PathVariable Long productId) {
 		Feature feature = featureService.findById(featureId);
-		model.put("comments", getCommentsWithotDuplicates(feature.getComments()));
+		model.put("comments", getCommentsWithotDuplicates(0, new HashSet<Long>() ,feature.getComments()));
 		model.put("feature", feature);
 		model.put("user",user);
 		return "features";
 	}
 	
-	public Set<Comment> getCommentsWithotDuplicates(Set<Comment> comments){
-		
+	public Set<Comment> getCommentsWithotDuplicates(int page, Set<Long> visitedComments, Set<Comment> comments){
+		page++;
+		Iterator<Comment> itr=comments.iterator();
+		while (itr.hasNext()) {
+			Comment comment =itr.next();
+			boolean addedToVisitedComments=visitedComments.add(comment.getId());
+			if(!addedToVisitedComments) {
+				itr.remove();
+				if(page!=1)
+					return comments;
+			}
+			if (addedToVisitedComments && !comment.getComments().isEmpty())
+				getCommentsWithotDuplicates(page, visitedComments, comment.getComments());
+		}
 		return  comments;
 	}
 	
