@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.SortedSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -43,7 +44,7 @@ public class FeatureController {
 		return "features";
 	}
 	
-	public Set<Comment> getCommentsWithotDuplicates(int page, Set<Long> visitedComments, Set<Comment> comments){
+	public SortedSet<Comment> getCommentsWithotDuplicates(int page, Set<Long> visitedComments, SortedSet<Comment> comments){
 		page++;
 		Iterator<Comment> itr=comments.iterator();
 		while (itr.hasNext()) {

@@ -2,6 +2,7 @@ package com.freshvotes.domain;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,7 +28,7 @@ public class Comment implements Comparable<Comment> {
 	private User user;
 	private Comment comment;
 	private Date createdDate;
-	private Set<Comment> comments= new TreeSet<>();
+	private SortedSet<Comment> comments= new TreeSet<>();
 	
 	@Column(length = 5000)
 	public String getText() {
@@ -74,17 +76,19 @@ public class Comment implements Comparable<Comment> {
 		this.createdDate = createdDate;
 	}
 	@OneToMany(mappedBy = "comment")
-	public Set<Comment> getComments() {
+	@OrderBy("createdDate,id")
+	public SortedSet<Comment> getComments() {
 		return comments;
 	}
-	public void setComments(Set<Comment> comments) {
+	public void setComments(SortedSet<Comment> comments) {
 		this.comments = comments;
 	}
+
+	
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", text=" + text + "]";
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
