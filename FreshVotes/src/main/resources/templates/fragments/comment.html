@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+	</head>
+	<body>
+	    <div th:fragment="commentThread" th:remove="tag">
+                <div th:each="comment : ${thread}" style="margin-left: 1em" >
+                    <span th:text="${comment.text}">Example</span>
+                    <div th:with="thread = ${comment.comments}" th:include="fragments/comment.html :: commentThread" th:remove="tag" ></div>
+                </div>
+        </div>
+	
+	
+	
+	</body>
+</html>
