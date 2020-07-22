@@ -35,12 +35,15 @@
 	      	</div>
 	      </form>
 	      		<h2>Comments</h2>
-		      		<form action="">
+		      		<form th:action="@{/product/{productId}/features/{featureId}/comments(productId=${feature.product.id},featureId=${feature.id})}" method="post">
+		      		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		      			<div class="form-group" style="margin-top: 1.5em">
 			      			<label for = exampleFormControlTextArea>Leave a comment below</label>
-			      			<textarea  id="exampleFormControlTextArea"  rows="3" class="form-control" ></textarea>
+			      			<textarea  id="exampleFormControlTextArea" th:field="${comment.text}"  rows="3" class="form-control" ></textarea>
 		      			</div>
+		      			<button type="submit" class="btn btn-primary">Add Comment</button>
 		      		</form>
+		      		<hr>
 		  		<script th:replace="fragments/comment :: commentThread"></script>
       </div>
 </body>

@@ -41,6 +41,7 @@ public class FeatureController {
 		model.put("thread", getCommentsWithotDuplicates(0, new HashSet<Long>() ,feature.getComments()));
 		model.put("feature", feature);
 		model.put("user",user);
+		model.put("comment", new Comment());
 		return "features";
 	}
 	
